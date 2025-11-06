@@ -11,6 +11,10 @@ import PielSensible from "./pages/PielSensible";
 import Blog from "./pages/Blog";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
+import MediasElasticasParaVarices from "./pages/blog/MediasElasticasParaVarices";
+import TiposMediasCompresion from "./pages/blog/TiposMediasCompresion";
+import MediasAntiembolicas from "./pages/blog/MediasAntiembolicas";
+import ComoElegirTallaCorrecta from "./pages/blog/ComoElegirTallaCorrecta";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +31,10 @@ const App = () => (
           <Route path="/trabajo-de-pie" element={<TrabajoPie />} />
           <Route path="/piel-sensible" element={<PielSensible />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/medias-elasticas-para-varices" element={<MediasElasticasParaVarices />} />
+          <Route path="/blog/tipos-de-medias-de-compresion" element={<TiposMediasCompresion />} />
+          <Route path="/blog/medias-antiembolicas" element={<MediasAntiembolicas />} />
+          <Route path="/blog/como-elegir-talla-correcta" element={<ComoElegirTallaCorrecta />} />
           <Route path="/preguntas-frecuentes" element={<FAQ />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
