@@ -134,7 +134,25 @@ export const products: Product[] = [
   },
 ];
 
-export const getProductsByCategory = (category: string): Product[] => {
+export const getWhatsAppLink = (productName: string, message?: string): string => {
+  const phone = "51904541341"; // Reemplaza con el número de WhatsApp real
+  
+  // 1. Declarar la variable 'originUrl' aquí, con un valor por defecto.
+  //    Esto asegura que esté definida en toda la función.
+  let originUrl = "sitio-web"; 
+
+  // 2. Intentar obtener la URL real solo si estamos en el navegador.
+  if (typeof window !== 'undefined') {
+    // Usamos .href para la URL completa, o puedes usar .origin para solo el dominio
+    originUrl = window.location.href; 
+  }
+  // 3. Usar 'originUrl' para construir el mensaje.
+  const defaultMessage = `Hola, quiero información del producto: ${productName} y vengo de ${originUrl}`;
+  const text = message || defaultMessage;
+  
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+};
+/*export const getProductsByCategory = (category: string): Product[] => {
   return products.filter((p) => p.category.includes(category));
 };
 
