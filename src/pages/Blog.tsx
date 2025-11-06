@@ -1,5 +1,5 @@
 import Navigation from "@/components/Navigation";
-
+import { Link } from "react-router-dom";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 import Footer from "@/components/Footer";
@@ -17,7 +17,7 @@ const Blog = () => {
 
       excerpt:
         "Guía completa paso a paso para medir tus piernas y elegir la talla perfecta que te brinde el máximo alivio sin incomodidad.",
-
+      url: "/blog/como-elegir-talla-correcta",
       readTime: "5 min",
 
       category: "Guías",
@@ -28,7 +28,7 @@ const Blog = () => {
 
       excerpt:
         "Descubre los síntomas tempranos que indican que es momento de empezar a usar compresión para prevenir que empeoren.",
-
+      url: "/blog/medias-elasticas-para-varices",
       readTime: "4 min",
 
       category: "Salud",
@@ -39,7 +39,7 @@ const Blog = () => {
 
       excerpt:
         "Entiende qué le pasa a tu circulación cuando estás de pie muchas horas y por qué la compresión es la solución.",
-
+      url: "/blog/tipos-de-medias-de-compresion",
       readTime: "6 min",
 
       category: "Educación",
@@ -50,7 +50,7 @@ const Blog = () => {
 
       excerpt:
         "Cómo las medias de compresión pueden aliviar las molestias del embarazo y prevenir complicaciones vasculares.",
-
+      url: "/blog/medias-antiembolicas",
       readTime: "7 min",
 
       category: "Embarazo",
@@ -99,49 +99,43 @@ const Blog = () => {
       </section>
 
       {/* Articles Grid */}
-
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* --- 3. ENLAZAR LAS TARJETAS --- */}
           {articles.map((article, index) => (
-            <Card key={index} className="border-border hover:shadow-card transition-shadow group">
-              <CardHeader className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
-                    {article.category}
-                  </span>
-
-                  <div className="flex items-center gap-1 text-muted-foreground">
-                    <Clock className="w-3 h-3" />
-
-                    <span className="text-xs">{article.readTime}</span>
+            // Envolvemos toda la tarjeta en un Link
+            <Link to={article.url} key={index} className="block no-underline text-current">
+              <Card className="border-border hover:shadow-card transition-shadow group h-full flex flex-col">
+                <CardHeader className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
+                      {article.category}
+                    </span>
+                    <div className="flex items-center gap-1 text-muted-foreground">
+                      <Clock className="w-3 h-3" />
+                      <span className="text-xs">{article.readTime}</span>
+                    </div>
                   </div>
-                </div>
-
-                <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                  {article.title}
-                </h3>
-              </CardHeader>
-
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground">{article.excerpt}</p>
-
-                <Button variant="ghost" className="group/btn p-0 h-auto text-primary hover:bg-transparent">
-                  Leer más
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-              </CardContent>
-            </Card>
+                  <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                    {article.title}
+                  </h3>
+                </CardHeader>
+                {/* Hacemos que el contenido crezca para alinear el "Leer más" abajo */}
+                <CardContent className="space-y-4 flex-grow flex flex-col justify-between">
+                  <p className="text-muted-foreground">{article.excerpt}</p>
+                  {/* Reemplazamos el <Button> por un div con el mismo estilo */}
+                  <div className="pt-2 text-primary font-medium flex items-center">
+                    Leer más
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
 
-        {/* Coming Soon Notice */}
-
-        <div className="mt-12 text-center p-8 bg-muted/30 rounded-lg">
-          <p className="text-muted-foreground">
-            Próximamente publicaremos estos artículos completos. Mientras tanto, escríbenos por WhatsApp si tienes
-            alguna duda específica.
-          </p>
-        </div>
+        {/* --- 4. SECCIÓN "PRÓXIMAMENTE" ELIMINADA --- */}
+        {/* Ya no es necesaria porque los artículos están enlazados */}
       </section>
 
       <Footer />
