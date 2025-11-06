@@ -716,7 +716,7 @@ export const TestDialog = ({ open, onOpenChange }: TestDialogProps) => {
                   id="whatsapp"
                   value={testData.whatsapp || ""}
                   onChange={(e) => setTestData({ ...testData, whatsapp: e.target.value })}
-                  placeholder="+57 300 123 4567"
+                  placeholder="+51 999 123 777"
                   required
                 />
               </div>
