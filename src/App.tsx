@@ -15,6 +15,7 @@ import MediasElasticasParaVarices from "./pages/blog/MediasElasticasParaVarices"
 import TiposMediasCompresion from "./pages/blog/TiposMediasCompresion";
 import MediasAntiembolicas from "./pages/blog/MediasAntiembolicas";
 import ComoElegirTallaCorrecta from "./pages/blog/ComoElegirTallaCorrecta";
+import ComoElegirTallaCorrecta from "@/pages/blog/ComoElegirTallaCorrecta";
 
 const queryClient = new QueryClient();
 
