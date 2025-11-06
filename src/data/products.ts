@@ -141,7 +141,7 @@ export const getProductsByCategory = (category: string): Product[] => {
 export const getFeaturedProducts = (): Product[] => {
   return products.slice(0, 3);
 };
-export const getWhatsAppLink = () => {
+
   const originUrl = window.location.origin;
   const phone = "51904541341"; // Replace with actual WhatsApp number
   const text = message || `Hola, quiero información del producto: ${productName} vengo de la web: ${originUrl}`;
