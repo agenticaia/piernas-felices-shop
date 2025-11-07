@@ -1,48 +1,43 @@
+import { Link } from "react-router-dom"; // <-- 1. IMPORTAR LINK
 import Navigation from "@/components/Navigation";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+// Quitamos Button porque ya no se usa, lo reemplaza el Link
 import { Clock, ArrowRight } from "lucide-react";
 
 const Blog = () => {
+  // --- 2. ACTUALIZAR LISTA DE ARTÍCULOS ---
+  // Ahora usamos los artículos reales con sus URLs
   const articles = [
     {
       title: "¿Cómo elegir la talla correcta de medias de compresión?",
-      excerpt: "Guía completa paso a paso para medir tus piernas y elegir la talla perfecta que te brinde el máximo alivio sin incomodidad.",
+      excerpt: "Aprende a medir tus piernas correctamente y elegir la talla perfecta de medias de compresión.",
+      url: "/blog/como-elegir-talla-correcta",
       readTime: "5 min",
-      category: "Guías"
+      category: "Guías",
     },
     {
-      title: "Várices: 7 señales de que necesitas medias de compresión YA",
-      excerpt: "Descubre los síntomas tempranos que indican que es momento de empezar a usar compresión para prevenir que empeoren.",
+      title: "Medias elásticas para várices: alivio efectivo",
+      excerpt: "Guía pilar completa sobre medias para várices y cómo alivian los síntomas.",
+      url: "/blog/medias-elasticas-para-varices",
       readTime: "4 min",
-      category: "Salud"
+      category: "Salud",
     },
     {
-      title: "¿Por qué se hinchan las piernas al trabajar de pie? La ciencia detrás",
-      excerpt: "Entiende qué le pasa a tu circulación cuando estás de pie muchas horas y por qué la compresión es la solución.",
+      title: "Tipos de medias de compresión",
+      excerpt: "Conoce todos los tipos y niveles de compresión disponibles y cuál es el adecuado para ti.",
+      url: "/blog/tipos-de-medias-de-compresion",
       readTime: "6 min",
-      category: "Educación"
+      category: "Educación",
     },
     {
-      title: "Medias de compresión en el embarazo: Todo lo que necesitas saber",
-      excerpt: "Cómo las medias de compresión pueden aliviar las molestias del embarazo y prevenir complicaciones vasculares.",
-      readTime: "7 min",
-      category: "Embarazo"
-    },
-    {
-      title: "¿Dan calor las medias de compresión? Mitos y realidades",
-      excerpt: "Desmontamos el mito más común sobre las medias de compresión y te damos opciones para clima cálido.",
+      title: "Medias Antiembolicas: ¿Qué son y cuándo usarlas?",
+      excerpt: "Guía esencial sobre las medias antiembólicas y su rol en la prevención de trombosis postoperatoria.",
+      url: "/blog/medias-antiembolicas",
       readTime: "4 min",
-      category: "Mitos"
+      category: "Prevención",
     },
-    {
-      title: "Cómo cuidar tus medias de compresión para que duren más",
-      excerpt: "Técnicas de lavado y cuidado que prolongarán la vida útil de tus medias manteniendo la compresión efectiva.",
-      readTime: "5 min",
-      category: "Cuidados"
-    }
   ];
 
   return (
@@ -50,13 +45,11 @@ const Blog = () => {
       <Navigation />
       <WhatsAppFloat />
 
-      {/* Header */}
+      {/* Header (sin cambios) */}
       <section className="bg-gradient-hero text-primary-foreground py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center space-y-4">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              Blog: Todo sobre medias de compresión
-            </h1>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">Blog: Todo sobre medias de compresión</h1>
             <p className="text-lg text-primary-foreground/90">
               Guías, consejos y información para que tomes la mejor decisión para tu salud
             </p>
@@ -67,42 +60,41 @@ const Blog = () => {
       {/* Articles Grid */}
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* --- 3. ENLAZAR LAS TARJETAS --- */}
           {articles.map((article, index) => (
-            <Card key={index} className="border-border hover:shadow-card transition-shadow group">
-              <CardHeader className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
-                    {article.category}
-                  </span>
-                  <div className="flex items-center gap-1 text-muted-foreground">
-                    <Clock className="w-3 h-3" />
-                    <span className="text-xs">{article.readTime}</span>
+            // Envolvemos toda la tarjeta en un Link
+            <Link to={article.url} key={index} className="block no-underline text-current">
+              <Card className="border-border hover:shadow-card transition-shadow group h-full flex flex-col">
+                <CardHeader className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
+                      {article.category}
+                    </span>
+                    <div className="flex items-center gap-1 text-muted-foreground">
+                      <Clock className="w-3 h-3" />
+                      <span className="text-xs">{article.readTime}</span>
+                    </div>
                   </div>
-                </div>
-                <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                  {article.title}
-                </h3>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground">
-                  {article.excerpt}
-                </p>
-                <Button variant="ghost" className="group/btn p-0 h-auto text-primary hover:bg-transparent">
-                  Leer más
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-              </CardContent>
-            </Card>
+                  <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                    {article.title}
+                  </h3>
+                </CardHeader>
+                {/* Hacemos que el contenido crezca para alinear el "Leer más" abajo */}
+                <CardContent className="space-y-4 flex-grow flex flex-col justify-between">
+                  <p className="text-muted-foreground">{article.excerpt}</p>
+                  {/* Reemplazamos el <Button> por un div con el mismo estilo */}
+                  <div className="pt-2 text-primary font-medium flex items-center">
+                    Leer más
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
 
-        {/* Coming Soon Notice */}
-        <div className="mt-12 text-center p-8 bg-muted/30 rounded-lg">
-          <p className="text-muted-foreground">
-            Próximamente publicaremos estos artículos completos.
-            Mientras tanto, escríbenos por WhatsApp si tienes alguna duda específica.
-          </p>
-        </div>
+        {/* --- 4. SECCIÓN "PRÓXIMAMENTE" ELIMINADA --- */}
+        {/* Ya no es necesaria porque los artículos están enlazados */}
       </section>
 
       <Footer />
