@@ -16,7 +16,7 @@ interface OrderModalProps {
   selectedColor?: string;
 }
 
-const WHATSAPP_NUMBER = "51987654321"; // Número correcto de WhatsApp
+const WHATSAPP_NUMBER = "51941941083"; // Número correcto de WhatsApp
 
 const OrderModal = ({ open, onOpenChange, product, selectedColor }: OrderModalProps) => {
   const [step, setStep] = useState(1);
@@ -63,7 +63,7 @@ const OrderModal = ({ open, onOpenChange, product, selectedColor }: OrderModalPr
     setIsLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('create-order', {
+      const { data, error } = await supabase.functions.invoke("create-order", {
         body: {
           customer_name: formData.name,
           customer_lastname: formData.lastname,
@@ -81,7 +81,7 @@ const OrderModal = ({ open, onOpenChange, product, selectedColor }: OrderModalPr
       setOrderCode(data.order_code);
       setStep(4);
     } catch (error) {
-      console.error('Error al crear pedido:', error);
+      console.error("Error al crear pedido:", error);
       toast({
         title: "Error",
         description: "No pudimos procesar tu pedido. Intenta nuevamente.",
@@ -111,7 +111,7 @@ Nombre: ${formData.name} ${formData.lastname}
 ¡Gracias por tu compra! Pronto nos pondremos en contacto contigo. 😊`;
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl, "_blank");
     handleClose();
   };
 
@@ -124,22 +124,17 @@ Nombre: ${formData.name} ${formData.lastname}
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
                 <ShieldCheck className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">
-                ¡Excelente Elección! 🎉
-              </h3>
+              <h3 className="text-2xl font-bold text-foreground">¡Excelente Elección! 🎉</h3>
               <p className="text-muted-foreground text-lg">
-                Las medias <span className="font-semibold text-foreground">{product.name}</span> son
-                perfectas para {product.idealFor.toLowerCase()}
+                Las medias <span className="font-semibold text-foreground">{product.name}</span> son perfectas para{" "}
+                {product.idealFor.toLowerCase()}
               </p>
-              
+
               <div className="bg-accent/20 border border-accent rounded-lg p-6 mt-6">
                 <p className="text-sm text-muted-foreground mb-3">
-                  "Uso estas medias diariamente y me han ayudado muchísimo con la circulación.
-                  ¡Son súper cómodas!"
+                  "Uso estas medias diariamente y me han ayudado muchísimo con la circulación. ¡Son súper cómodas!"
                 </p>
-                <p className="text-xs font-semibold text-foreground">
-                  — María T., Cliente satisfecha
-                </p>
+                <p className="text-xs font-semibold text-foreground">— María T., Cliente satisfecha</p>
               </div>
             </div>
 
@@ -157,9 +152,7 @@ Nombre: ${formData.name} ${formData.lastname}
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
                 <Package className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">
-                Pide Gratis, Paga en Casa 🏠
-              </h3>
+              <h3 className="text-2xl font-bold text-foreground">Pide Gratis, Paga en Casa 🏠</h3>
               <p className="text-muted-foreground text-lg">
                 No pagas ahora. Solo cuando recibas tu pedido en tu domicilio.
               </p>
@@ -188,10 +181,8 @@ Nombre: ${formData.name} ${formData.lastname}
               <div className="bg-accent/20 border border-accent rounded-lg p-4 mt-4">
                 <Phone className="w-6 h-6 text-accent mx-auto mb-2" />
                 <p className="text-sm text-muted-foreground">
-                  Te enviaremos un mensaje de confirmación por WhatsApp al número: 
-                  <span className="font-semibold text-foreground block mt-1">
-                    +{WHATSAPP_NUMBER}
-                  </span>
+                  Te enviaremos un mensaje de confirmación por WhatsApp al número:
+                  <span className="font-semibold text-foreground block mt-1">+{WHATSAPP_NUMBER}</span>
                 </p>
               </div>
             </div>
@@ -207,12 +198,8 @@ Nombre: ${formData.name} ${formData.lastname}
         return (
           <div className="space-y-6 py-6">
             <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-foreground mb-2">
-                Completa tus datos
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                Solo necesitamos algunos datos para procesar tu pedido
-              </p>
+              <h3 className="text-2xl font-bold text-foreground mb-2">Completa tus datos</h3>
+              <p className="text-sm text-muted-foreground">Solo necesitamos algunos datos para procesar tu pedido</p>
             </div>
 
             <div className="space-y-4">
@@ -282,12 +269,7 @@ Nombre: ${formData.name} ${formData.lastname}
               </div>
             </div>
 
-            <Button 
-              onClick={handleSubmit} 
-              className="w-full" 
-              size="lg"
-              disabled={isLoading}
-            >
+            <Button onClick={handleSubmit} className="w-full" size="lg" disabled={isLoading}>
               {isLoading ? "Procesando..." : "Confirmar Pedido"}
             </Button>
           </div>
@@ -300,14 +282,10 @@ Nombre: ${formData.name} ${formData.lastname}
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">
-                ¡Pedido Confirmado! 🎉
-              </h3>
-              
+              <h3 className="text-2xl font-bold text-foreground">¡Pedido Confirmado! 🎉</h3>
+
               <div className="bg-primary/10 border border-primary rounded-lg p-6">
-                <p className="text-sm text-muted-foreground mb-2">
-                  Tu código de seguimiento es:
-                </p>
+                <p className="text-sm text-muted-foreground mb-2">Tu código de seguimiento es:</p>
                 <p className="text-3xl font-bold text-primary">{orderCode}</p>
               </div>
 
@@ -317,19 +295,17 @@ Nombre: ${formData.name} ${formData.lastname}
                 </p>
                 <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside">
                   <li>Ve a la sección de "Seguimiento" en nuestra web</li>
-                  <li>Ingresa tu código: <span className="font-semibold text-foreground">{orderCode}</span></li>
+                  <li>
+                    Ingresa tu código: <span className="font-semibold text-foreground">{orderCode}</span>
+                  </li>
                   <li>Verás el estado actual de tu pedido</li>
                 </ol>
               </div>
 
               <div className="bg-accent/20 border border-accent rounded-lg p-4">
                 <Phone className="w-6 h-6 text-accent mx-auto mb-2" />
-                <p className="text-sm text-muted-foreground">
-                  Te enviaremos la confirmación por WhatsApp
-                </p>
-                <p className="text-sm font-semibold text-foreground mt-1">
-                  +{WHATSAPP_NUMBER}
-                </p>
+                <p className="text-sm text-muted-foreground">Te enviaremos la confirmación por WhatsApp</p>
+                <p className="text-sm font-semibold text-foreground mt-1">+{WHATSAPP_NUMBER}</p>
               </div>
             </div>
 
@@ -347,9 +323,7 @@ Nombre: ${formData.name} ${formData.lastname}
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
-        {renderStep()}
-      </DialogContent>
+      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">{renderStep()}</DialogContent>
     </Dialog>
   );
 };
