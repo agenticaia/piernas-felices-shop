@@ -15,7 +15,12 @@ import MediasElasticasParaVarices from "@/pages/blog/MediasElasticasParaVarices"
 import TiposMediasCompresion from "@/pages/blog/TiposMediasCompresion";
 import MediasAntiembolicas from "@/pages/blog/MediasAntiembolicas";
 import ComoElegirTallaCorrecta from "@/pages/blog/ComoElegirTallaCorrecta";
-import Seguimiento from "@/pages/Seguimiento";
+import Seguimiento from "./pages/Seguimiento";
+import AdminLogin from "./pages/admin/AdminLogin";
+import Dashboard from "./pages/admin/Dashboard";
+import Orders from "./pages/admin/Orders";
+import Products from "./pages/admin/Products";
+import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +43,13 @@ const App = () => (
           <Route path="/blog/como-elegir-talla-correcta" element={<ComoElegirTallaCorrecta />} />
           <Route path="/preguntas-frecuentes" element={<FAQ />} />
           <Route path="/seguimiento" element={<Seguimiento />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<ProtectedAdminRoute><Dashboard /></ProtectedAdminRoute>} />
+          <Route path="/admin/pedidos" element={<ProtectedAdminRoute><Orders /></ProtectedAdminRoute>} />
+          <Route path="/admin/productos" element={<ProtectedAdminRoute><Products /></ProtectedAdminRoute>} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
