@@ -32,27 +32,24 @@ const Seguimiento = () => {
     setOrder(null);
 
     try {
-      // Use secure lookup function to prevent unauthorized access to all orders
       const { data, error } = await supabase
-        .rpc('get_order_by_code', { 
-          lookup_code: orderCode.trim().toUpperCase() 
-        });
+        .from("orders")
+        .select("*")
+        .eq("order_code", orderCode.trim().toUpperCase())
+        .maybeSingle();
 
       if (error) {
-        console.error("Error al buscar pedido:", error);
-        toast({
-          title: "Error",
-          description: "No pudimos buscar tu pedido. Intenta nuevamente.",
-          variant: "destructive",
-        });
-      } else if (!data || data.length === 0) {
-        toast({
-          title: "Pedido no encontrado",
-          description: "No encontramos un pedido con ese código. Verifica e intenta nuevamente.",
-          variant: "destructive",
-        });
+        if (error.code === "PGRST116") {
+          toast({
+            title: "Pedido no encontrado",
+            description: "No encontramos un pedido con ese código. Verifica e intenta nuevamente.",
+            variant: "destructive",
+          });
+        } else {
+          throw error;
+        }
       } else {
-        setOrder(data[0]);
+        setOrder(data);
       }
     } catch (error) {
       console.error("Error al buscar pedido:", error);

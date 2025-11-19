@@ -187,15 +187,9 @@ export function useProductWithMetrics(options: UseProductMetricsOptions = {}) {
 
   const trackProductView = async (productCode: string) => {
     try {
-      // Registrar visualización en user_interactions
-      const sessionId = typeof window !== 'undefined' ? localStorage.getItem('plazamedik_session_id') || 'anonymous' : 'anonymous';
-      await supabase
-        .from('user_interactions')
-        .insert({
-          session_id: sessionId,
-          product_code: productCode,
-          action: 'view'
-        });
+      await supabase.rpc('increment_product_views', {
+        p_product_code: productCode
+      });
     } catch (err) {
       console.error('Error tracking product view:', err);
     }

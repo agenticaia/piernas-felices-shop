@@ -86,30 +86,6 @@ export type Database = {
         }
         Relationships: []
       }
-      order_rate_limit: {
-        Row: {
-          attempt_count: number | null
-          created_at: string | null
-          id: string
-          ip_address: string
-          last_attempt_at: string | null
-        }
-        Insert: {
-          attempt_count?: number | null
-          created_at?: string | null
-          id?: string
-          ip_address: string
-          last_attempt_at?: string | null
-        }
-        Update: {
-          attempt_count?: number | null
-          created_at?: string | null
-          id?: string
-          ip_address?: string
-          last_attempt_at?: string | null
-        }
-        Relationships: []
-      }
       orders: {
         Row: {
           created_at: string
@@ -289,35 +265,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      check_order_rate_limit: {
-        Args: {
-          client_ip: string
-          max_attempts?: number
-          window_hours?: number
-        }
-        Returns: boolean
-      }
       generate_order_code: { Args: never; Returns: string }
-      get_order_by_code: {
-        Args: { lookup_code: string }
-        Returns: {
-          created_at: string
-          customer_district: string
-          customer_lastname: string
-          customer_name: string
-          customer_phone: string
-          id: string
-          order_code: string
-          product_code: string
-          product_color: string
-          product_name: string
-          product_price: number
-          recommended_by: string
-          source: string
-          status: string
-          updated_at: string
-        }[]
-      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

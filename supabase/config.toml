@@ -1,10 +1,4 @@
-project_id = "jrnpwhyuoganoefzoqhq"
+project_id = "lqeevfvrtifsidfghtwz"
 
 [functions.create-order]
-verify_jwt = false
-
-[functions.calculate-similarity]
-verify_jwt = false
-
-[functions.predict-inventory]
 verify_jwt = false
