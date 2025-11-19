@@ -86,6 +86,30 @@ export type Database = {
         }
         Relationships: []
       }
+      order_rate_limit: {
+        Row: {
+          attempt_count: number | null
+          created_at: string | null
+          id: string
+          ip_address: string
+          last_attempt_at: string | null
+        }
+        Insert: {
+          attempt_count?: number | null
+          created_at?: string | null
+          id?: string
+          ip_address: string
+          last_attempt_at?: string | null
+        }
+        Update: {
+          attempt_count?: number | null
+          created_at?: string | null
+          id?: string
+          ip_address?: string
+          last_attempt_at?: string | null
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           created_at: string
@@ -265,6 +289,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_order_rate_limit: {
+        Args: {
+          client_ip: string
+          max_attempts?: number
+          window_hours?: number
+        }
+        Returns: boolean
+      }
       generate_order_code: { Args: never; Returns: string }
       has_role: {
         Args: {
