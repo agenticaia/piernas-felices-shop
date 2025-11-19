@@ -39,27 +39,27 @@ export default function RecommendationPanel({ currentProductCode }: Recommendati
         <div className="space-y-3">
           {recommendations.map((rec) => (
             <div
-              key={rec.product_code}
-              onClick={() => handleRecommendationClick(rec.product_code)}
+              key={rec.code}
+              onClick={() => handleRecommendationClick(rec.code)}
               className="border border-border rounded-lg p-3 cursor-pointer hover:shadow-lg transition-all duration-200 hover:border-primary"
             >
               <div className="flex gap-3">
                 <div className="w-20 h-20 flex-shrink-0 bg-muted rounded overflow-hidden">
                   <img
-                    src={rec.imagen_url || '/placeholder.svg'}
-                    alt={rec.nombre_producto}
+                    src={rec.image}
+                    alt={rec.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
 
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-sm line-clamp-2 text-foreground mb-1">
-                    {rec.nombre_producto}
+                    {rec.name}
                   </p>
-                  <p className="text-xs text-muted-foreground mb-2">{rec.categoria}</p>
+                  <p className="text-xs text-muted-foreground mb-2">{rec.category}</p>
                   <div className="flex items-center justify-between">
                     <p className="text-primary font-bold text-lg">
-                      S/ {rec.precio.toFixed(2)}
+                      S/ {rec.priceSale.toFixed(2)}
                     </p>
                   </div>
                 </div>
